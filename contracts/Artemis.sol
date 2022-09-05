@@ -178,7 +178,9 @@ contract Artemis is Initializable, ArtemisStorage {
         uint256 amount = task.payoutBalance;
         task.payoutBalance = 0;
         s.lobbies[addr].funderTakeAwaySum += amount;
-        AddressUpgradeable.sendValue(payable(msg.sender), amount);
+        s.fund[msg.sender] += amount;
+        // v0.0.2 when funder leave, xDai will send to s.fund first
+        // AddressUpgradeable.sendValue(payable(msg.sender), amount);
         emit FunderLeave(addr, taskId, amount);
     }
 

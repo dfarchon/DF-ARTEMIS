@@ -27,6 +27,10 @@ use [SubGraph](https://thegraph.com/en/) to query the history log of arrivals to
 **Funder and Mercenaries need to trust Manager**, 
 the smart contract determine the rules.
 
+中文使用指南： https://www.youtube.com/watch?v=UsrTy-AgXMo
+
+
+
 
 ## 1. Warning 
 
@@ -47,8 +51,7 @@ Before using a plugin, it is recommended that you have a complete understanding 
 Go into one dark forest lobby,  add a new plugin, and input the below code.
 
 ```js
-export {default} from "https://cdn.jsdelivr.net/gh/dfarchon/df-artemis@master/dest/Artemis-v0.0.1.js"
-
+export {default} from "https://cdn.jsdelivr.net/gh/dfarchon/artemis-dest@master/Artemis-v0.0.2.js"
 ```
 
 

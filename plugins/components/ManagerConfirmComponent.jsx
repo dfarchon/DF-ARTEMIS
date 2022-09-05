@@ -62,10 +62,10 @@ const ManagerConfirmForOne = ({t, account}) => {
             return
         }
 
-        if (+mercenarySubmitAmount !== +managerQueryAmount) {
+        if (+mercenarySubmitAmount > +managerQueryAmount) {
             console.log(+mercenarySubmitAmount)
             console.log(+managerQueryAmount)
-            alert("Amount Not Equal")
+            alert("Mercenary Claim More")
             return
         }
 
@@ -73,7 +73,8 @@ const ManagerConfirmForOne = ({t, account}) => {
         setProcessing(true)
         const methodName = "managerConfirm"
         let addr = LOBBY_CONTRACT_ADDRESS
-        const input = [addr, t.taskId, account.toLowerCase(), utils.parseEther(managerQueryAmount)]
+        const input = [addr, t.taskId, account.toLowerCase(), utils.parseEther(mercenarySubmitAmount)]
+        console.log(input)
 
         const overrides = {
             gasLimit: 5000000,

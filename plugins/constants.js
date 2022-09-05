@@ -25,4 +25,4 @@ export const isLobbyRound = lobbyRound.indexOf(LOBBY_CONTRACT_ADDRESS) > -1
 
 export const SUBGRAPH_API_URL = "https://api.thegraph.com/subgraphs/name/fromddy/df-artemis"
 
-
+export const version = "v0.0.2"

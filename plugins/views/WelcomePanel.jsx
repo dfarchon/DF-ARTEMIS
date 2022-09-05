@@ -5,6 +5,7 @@ import {useContract} from "../helpers/AppHooks"
 import dfstyles from "../helpers/dfstyles"
 import {ArtemisLabel} from "../components/labels/ArtemisLabel"
 import {RiskLabel} from "../components/labels/RiskLabel"
+import {version} from "../constants"
 
 const font = {
     fontSize: "30px",
@@ -16,13 +17,7 @@ const warning = {
 }
 
 export function WelcomePanel() {
-    const {
-        creatorFee,
-        adminFee,
-        managerFee,
-        maxFee,
-        isLobbyExists
-    } = useContract()
+    const {creatorFee, adminFee, managerFee, maxFee, isLobbyExists} = useContract()
 
     return (
         <div style={textCenter}>
@@ -30,6 +25,7 @@ export function WelcomePanel() {
                 <ArtemisLabel />
             </div>
 
+            <div style={{color: "gold"}}>{version}</div>
             {isLobbyExists ? (
                 <div>
                     <div>the smart contract and plugin have not been audited</div>
@@ -38,10 +34,6 @@ export function WelcomePanel() {
                     <div> Creator Fee: {creatorFee} % </div>
                     <div> Admin Fee: {adminFee} % </div>
                     <div> manager Fee: {managerFee} % </div>
-
-
-
-
                 </div>
             ) : (
                 <div>

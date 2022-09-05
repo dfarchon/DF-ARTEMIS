@@ -84,6 +84,16 @@ export const FunderPublishPanel = () => {
     const [blacklist, setBlacklist] = useState([])
     const [processing, setProcessing] = useState(false)
 
+    const init = () => {
+        setPlanetId(undefined)
+        setpayout(minFunderPayout)
+        setEnergy(100000000)
+        setManager(admin)
+        setDurationTime(minDurationTime)
+        setBlacklist([])
+        setProcessing(false)
+    }
+
     // function funderPublish(
     //     address addr,
     //     uint256 planetId,
@@ -102,6 +112,13 @@ export const FunderPublishPanel = () => {
 
     const centerPlanet = () => {
         if (planetId === undefined) return
+
+        let p = df.getPlanetWithId(planetId)
+        if (p === undefined) {
+            alert("This Planet Is Not In Your Map")
+            return
+        }
+
         ui.centerLocationId(planetId)
     }
 
@@ -226,6 +243,7 @@ export const FunderPublishPanel = () => {
                 notifyManager.txInitError(methodName, err.message)
             })
             .finally(() => {
+                init()
                 setProcessing(false)
             })
     }

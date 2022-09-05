@@ -8,7 +8,7 @@
         "compile": "hardhat compile",
         "coverage": "hardhat coverage",
         "lint": "prettier --list-different 'contracts/**/*.sol'",
-        "prettier:contract": "prettier --write 'contracts/**/*.sol'",
+        "prettier:contract": "prettier --write \"contracts/**/*.sol\"",
         "hardhat:node": "hardhat node --hostname 0.0.0.0",
         "hardhat:dev": "hardhat --network localhost",
         "hardhat:prod": "hardhat --network xdai",
@@ -17,7 +17,7 @@
         "deploy:xdai": "hardhat run scripts/deploy.ts --network xdai",
         "export-abi": "hardhat export-abi",
         "clear-abi": "hardhat clear-abi",
-        "prettier:plugin": "prettier --write 'plugins/**/*.{js,jsx}'",
+        "prettier:plugin": "prettier --write \"plugins/**/*.{js,jsx}\"",
         "start": "df-plugin-dev-server --glob plugins/*.jsx",
         "build": "df-plugin-dev-server bundle --glob plugins/*.jsx --outdir=dest/"
     },

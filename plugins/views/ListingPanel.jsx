@@ -51,12 +51,23 @@ export function ListingPanel({state}) {
     const {listingTasks, loading} = useAllTasks(a, 60000)
     const tasks = listingTasks.value || []
 
-    function showTaskInfo() {
+    async function showTaskInfo() {
         console.log("showTaskInfo")
         console.log(listingTasks)
         console.log(tasks)
+        // tasks.forEach((t) => {
+        //     console.log(t.mercenaries)
+        // })
+
         tasks.forEach((t) => {
-            console.log(t.mercenaries)
+            if (t.taskId.toNumber() === 22) {
+                console.log(t)
+
+                console.log("Payout Balance: " + utils.formatEther(t.payoutBalance))
+                console.log(t.mercenaries)
+
+                console.log("confirm before: " + value)
+            }
         })
     }
 

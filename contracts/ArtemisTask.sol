@@ -55,8 +55,8 @@ library ArtemisTask {
         require(task.funder == msg.sender, "only funder");
         require(amount > 0, "need amount > 0");
         require(amount + task.payoutTotal <= s().maxFunderPayout, "payout<=max");
-
-        require(task.beginTime + task.durationTime <= block.timestamp, "have no time");
+        // v0.0.2: no need to set add payout time limit
+        // require(task.beginTime + task.durationTime >= block.timestamp, "have no time");
 
         task.payoutTotal += amount;
         task.payoutBalance += amount;
@@ -138,6 +138,7 @@ library ArtemisTask {
         require(task.managerConfirm[mercenary] < amount, "only can confirm more");
         require(mercenary != task.funder, "mercenary!=task.funder");
         amount -= task.managerConfirm[mercenary];
+        require(amount > 0, "amount need > 0");
         require(task.payoutBalance >= amount, "funder payout is not enough");
         uint256 creatorFees = (s().creatorFee * amount) / 10000;
         uint256 adminFees = (s().lobbies[addr].fee * amount) / 10000;
@@ -149,6 +150,8 @@ library ArtemisTask {
         s().lobbies[addr].feeBalance += adminFees;
         s().fund[task.manager] += managerFees;
         task.payoutBalance -= amount;
+        // v0.0.2: state update for manager confirm
+        task.managerConfirm[mercenary] += amount;
 
         s().lobbies[addr].creatorFeesSum += creatorFees;
         s().lobbies[addr].adminFeesSum += adminFees;

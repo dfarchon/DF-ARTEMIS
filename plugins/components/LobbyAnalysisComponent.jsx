@@ -5,25 +5,32 @@ import {useContract, useLobbyAnalysis} from "../helpers/AppHooks"
 import dfstyles from "../helpers/dfstyles"
 import {AdminFeeComponent} from "../components/AdminFeeComponent"
 
+const lobbyAnalysisStyle = {
+    textAlign: "left",
+    marginLeft: "100px",
+}
 const lobbyAnalysisFont = {
     fontSize: "30px",
+    textAlign: "center",
 }
 
 const fi = {
     width: "200px",
+
     display: "inline-block",
     textAlign: "right",
 }
 
 const se = {
-    width: "80px",
+    width: "20px",
+
     display: "inline-block",
 }
 
 const th = {
-    width: "100px",
+    marinLeft: "100px",
+
     display: "inline-block",
-    textAlign: "left",
 }
 
 export const LobbyAnalysisComponenet = () => {
@@ -40,58 +47,61 @@ export const LobbyAnalysisComponenet = () => {
     } = useLobbyAnalysis()
 
     return (
-        <div style={textCenter}>
+        <div>
             <div style={lobbyAnalysisFont}> Lobby Analysis</div>
-            <div>
-                {" "}
-                <span style={fi}>Pause State : </span>
-                <span style={se}>{pause === undefined ? "?" : pause ? "true" : "false"}</span>
-                <span style={th}>{"           "}</span>
-            </div>
 
-            <div>
-                <span style={fi}> Task Count : </span>
-                <span style={se}> {taskCount === undefined ? "?" : taskCount}</span>
-                <span style={th}>{"           "}</span>
-            </div>
-            <div>
-                <span style={fi}>Funder Payout Sum : </span>
-                <span style={se}>{funderPayoutSum === undefined ? "?" : funderPayoutSum}</span>
-                <span style={th}>xDai</span>
-            </div>
-            <div>
-                <span style={fi}>Funder Take Away Sum : </span>
-                <span style={se}>{funderTakeAwaySum === undefined ? "?" : funderTakeAwaySum}</span>
-                <span style={th}>xDai</span>
-            </div>
+            <div style={lobbyAnalysisStyle}>
+                <div>
+                    {" "}
+                    <span style={fi}>Pause State: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{pause === undefined ? "?" : pause ? "true" : "false"}</span>
+                </div>
 
-            <div>
-                <span style={fi}>Creator Fees Sum : </span>
-                <span style={se}>{creatorFeesSum === undefined ? "?" : creatorFeesSum}</span>
-                <span style={th}>xDai</span>
-            </div>
+                <div>
+                    <span style={fi}> Task Count: </span>
+                    <span style={se}> </span>
+                    <span style={th}> {taskCount === undefined ? "?" : taskCount}</span>
+                </div>
+                <div>
+                    <span style={fi}>Funder Payout Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{funderPayoutSum === undefined ? "?" : funderPayoutSum} xDai</span>
+                </div>
+                <div>
+                    <span style={fi}>Funder Take Away Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{funderTakeAwaySum === undefined ? "?" : funderTakeAwaySum} xDai</span>
+                </div>
 
-            <div>
-                <span style={fi}>Admin Fees Sum : </span>
-                <span style={se}>{adminFeesSum === undefined ? "?" : adminFeesSum}</span>
-                <span style={th}>xDai</span>
-            </div>
+                <div>
+                    <span style={fi}>Creator Fees Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{creatorFeesSum === undefined ? "?" : creatorFeesSum} xDai</span>
+                </div>
 
-            <div>
-                <span style={fi}>Manager Fees Sum :</span>
-                <span style={se}>{managerFeesSum === undefined ? "?" : managerFeesSum}</span>
-                <span style={th}>xDai</span>
-            </div>
+                <div>
+                    <span style={fi}>Admin Fees Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{adminFeesSum === undefined ? "?" : adminFeesSum} xDai</span>
+                </div>
 
-            <div>
-                <span style={fi}>Tips Sum : </span>
-                <span style={se}>{tipsSum === undefined ? "?" : tipsSum}</span>
-                <span style={th}>xDai</span>
-            </div>
-            <div>
-                <span style={fi}>Mercenaries Salary Sum : </span>
-                <span style={se}>{mercenariesSalarySum === undefined ? "?" : mercenariesSalarySum}</span>
-                <span style={th}>xDai</span>
+                <div>
+                    <span style={fi}>Manager Fees Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{managerFeesSum === undefined ? "?" : managerFeesSum} xDai</span>
+                </div>
+
+                <div>
+                    <span style={fi}>Tips Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{tipsSum === undefined ? "?" : tipsSum} xDai</span>
+                </div>
+                <div>
+                    <span style={fi}>Mercenaries Salary Sum: </span>
+                    <span style={se}> </span>
+                    <span style={th}>{mercenariesSalarySum === undefined ? "?" : mercenariesSalarySum} xDai</span>
+                </div>
             </div>
         </div>
     )
