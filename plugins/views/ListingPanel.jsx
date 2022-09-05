@@ -103,6 +103,13 @@ export function ListingPanel({state}) {
             const center = () => {
                 let pid = locationIdFromDecStr(t.planetId.toString())
                 log(pid, "info")
+
+                let p = df.getPlanetWithId(pid)
+                if (p === undefined) {
+                    alert("This Planet Is Not In Your Map")
+                    return
+                }
+
                 ui.centerLocationId(pid)
             }
 
