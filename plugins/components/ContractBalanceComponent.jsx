@@ -11,21 +11,19 @@ import {BigNumber, utils} from "ethers"
 import {useLobbyFees} from "../helpers/AppHooks"
 import {Button} from "../components/Button"
 
+export const ContractBalanceComponent = () => {
+    const {a} = useContract()
+    const [balance, setBalance] = useState(undefined)
 
-export const ContractBalanceComponent = ()=>{
-    const {a} = useContract();
-    const [balance,setBalance] = useState(undefined);
-
-    
-    const query = async ()=>{
-        let res = await a.getContractBalance();
-        setBalance(utils.formatEther(res));
+    const query = async () => {
+        let res = await a.getContractBalance()
+        setBalance(utils.formatEther(res))
     }
 
-    return(<div>
-        <span> Contract Balance: {balance===undefined?"?":balance} xDai</span>
-        {" "}
-        <button onClick={query}>Query</button>
-    </div>);
-
+    return (
+        <div>
+            <span> Contract Balance: {balance === undefined ? "?" : balance} xDai</span>{" "}
+            <button onClick={query}>Query</button>
+        </div>
+    )
 }

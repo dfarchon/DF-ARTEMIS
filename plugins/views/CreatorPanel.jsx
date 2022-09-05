@@ -17,7 +17,7 @@ import {CreatorChangedComponent} from "../components/CreatorChangedComponent"
 import {CreatorFeesWithdrawComponent} from "../components/CreatorFeesWithdrawComponent"
 import {MinFunderPayoutComponent} from "../components/MinFunderPayoutComponent"
 import {MaxFunderPayoutComponent} from "../components/MaxFunderPayoutComponent"
-import {ContractBalanceComponent } from "../components/ContractBalanceComponent"
+import {ContractBalanceComponent} from "../components/ContractBalanceComponent"
 
 const creatorStyle = {
     ...textCenter,
@@ -79,8 +79,8 @@ export const CreatorPanel = () => {
                     />
                     <MaxFeeComponent a={a} maxFee={maxFee} creator={creator} />
                     <CreatorChangedComponent a={a} creator={creator} />
-                   
-                    < ContractBalanceComponent/>
+
+                    <ContractBalanceComponent />
                     <CreatorFeesWithdrawComponent />
                 </div>
             ) : (
