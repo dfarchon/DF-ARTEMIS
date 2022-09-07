@@ -11,8 +11,21 @@
 <p align="center">
   Contributor: <a href="https://twitter.com/DfArchon">@DfArchon</a>
 </p>
-
 # DF ARTEMIS
+
+## Latest News
+
+This project is participating in [2022 THUBA DAO's Summer Hack](https://dorahacks.io/zh/hackathon/34/detail) .
+
+The Smart Contact have deployed in **Polygon Mumbai** and have been verified in Polygonscan.
+
+[Library ArtemisTask Contract](https://mumbai.polygonscan.com/address/0x8f0b3fc4d6102af65e72f2c790635c6de3a29894#code)
+
+[Artemis Contract](https://mumbai.polygonscan.com/address/0x5fcf34ab78f3e61928d3d46ce716838ed171595f)
+
+
+
+## 0. Introduction
 
 Planet-targeted bounty mercenary system for Dark Forest.
 
@@ -28,8 +41,6 @@ use [SubGraph](https://thegraph.com/en/) to query the history log of arrivals to
 the smart contract determine the rules.
 
 中文使用指南： https://www.youtube.com/watch?v=UsrTy-AgXMo
-
-
 
 
 ## 1. Warning 
