@@ -64,6 +64,8 @@ export {default} from "https://cdn.jsdelivr.net/gh/dfarchon/artemis-dest@master/
 
 In the process of developing and testing DF ARTEMIS,  we would like to express our heartfelt thanks to all the friends who provided us with help and feedback.
 
+Special thanks to **ZKForest Community**, which give me lots of support.
+
 Special thanks to [DarkSea](https://github.com/snowtigersoft/darksea-market)'s developer @snowtigersoft, who enthusiastically answered all questions about smart contracts.
 
 Special thanks to [ClassicJordon](https://twitter.com/ClassicJordon), who helped to determine the plan for English front-end and organize testing activities.
