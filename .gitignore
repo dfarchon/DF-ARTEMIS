@@ -13,7 +13,6 @@ artifacts
 yarn-error.log
 abi
 deploy-log.md
-scripts
 test
 dest
 
