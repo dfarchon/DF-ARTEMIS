@@ -15,6 +15,7 @@
         "hardhat:mainnet": "hardhat --network mainnet",
         "hardhat:ropsten": "hardhat --newwork ropsten",
         "deploy:xdai": "hardhat run scripts/deploy.ts --network xdai",
+        "analysis:xdai": "hardhat run scripts/analysis.ts --network xdai",
         "export-abi": "hardhat export-abi",
         "clear-abi": "hardhat clear-abi",
         "prettier:plugin": "prettier --write \"plugins/**/*.{js,jsx}\"",
