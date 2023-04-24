@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.9;
 
-import "hardhat/console.sol";
-
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
@@ -55,7 +53,6 @@ contract Artemis is Initializable, ArtemisStorage {
         uint256 maxFee,
         address creator
     ) public initializer {
-        console.log("initialize");
         require(creatorFee <= maxFee, "creatorFee need <= maxFee");
         require(managerFee <= maxFee, "managerFee need <= maxFee");
         require(minDurationTime <= maxDurationTime, "about duration time");
@@ -244,7 +241,7 @@ contract Artemis is Initializable, ArtemisStorage {
         address addr,
         uint256 taskId,
         address account
-    ) public view lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) returns (bool) {
+    ) public view lobbyExists(addr) taskExists(addr, taskId) returns (bool) {
         return s.lobbies[addr].tasks[taskId].blacklistMap[account];
     }
 
@@ -252,7 +249,7 @@ contract Artemis is Initializable, ArtemisStorage {
         address addr,
         uint256 taskId,
         address mercenary
-    ) public view lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) returns (uint256) {
+    ) public view lobbyExists(addr) taskExists(addr, taskId) returns (uint256) {
         return s.lobbies[addr].tasks[taskId].mercenarySubmit[mercenary];
     }
 
@@ -260,7 +257,7 @@ contract Artemis is Initializable, ArtemisStorage {
         address addr,
         uint256 taskId,
         address mercenary
-    ) public view lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) returns (uint256) {
+    ) public view lobbyExists(addr) taskExists(addr, taskId) returns (uint256) {
         return s.lobbies[addr].tasks[taskId].managerConfirm[mercenary];
     }
 
@@ -332,13 +329,13 @@ contract Artemis is Initializable, ArtemisStorage {
         address addr,
         address to,
         uint256 amount
-    ) public lobbyExists(addr) onlyAdmin(addr) {
+    ) public lobbyExists(addr) onlyAdmin(addr) notPaused(addr) {
         require(s.lobbies[addr].feeBalance >= amount, "Not enough fee left");
         s.lobbies[addr].feeBalance -= amount;
         AddressUpgradeable.sendValue(payable(to), amount);
     }
 
-    function collectLobbyFees(address addr) external lobbyExists(addr) onlyAdmin(addr) {
+    function collectLobbyFees(address addr) external lobbyExists(addr) onlyAdmin(addr) notPaused(addr) {
         sendLobbyFees(addr, s.lobbies[addr].admin, s.lobbies[addr].feeBalance);
     }
 

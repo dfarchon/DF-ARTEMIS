@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.9;
 
-import "hardhat/console.sol";
-
 import "./ArtemisTypes.sol";
 
 library ArtemisTask {
@@ -102,8 +100,6 @@ library ArtemisTask {
         if (task.mercenarySubmit[msg.sender] == 0) task.mercenaries.push(msg.sender);
 
         task.mercenarySubmit[msg.sender] = amount;
-
-        console.log("task mercenary submit: %s", task.mercenarySubmit[msg.sender]);
     }
 
     function giveTips(
@@ -131,7 +127,7 @@ library ArtemisTask {
         uint256 amount
     ) public {
         ArtemisTypes.Task storage task = s().lobbies[addr].tasks[taskId];
-        console.log("amount %s", amount);
+
         require(msg.sender == task.manager, "only manager");
         require(task.blacklistMap[mercenary] == false, "mercenary in blacklist");
         require(task.mercenarySubmit[mercenary] == amount, "confirm value != claim value");

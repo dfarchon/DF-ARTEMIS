@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.9;
 
-import "hardhat/console.sol";
-
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 import "./ArtemisTypes.sol";
 
@@ -145,6 +143,7 @@ contract ArtemisStorage {
     event Withdraw(address indexed owner, uint256 amount);
 
     function withdraw() external {
+        require(!s.paused, "paused");
         uint256 amount = s.fund[msg.sender];
         if (amount > 0) {
             s.fund[msg.sender] = 0;
@@ -199,5 +198,15 @@ contract ArtemisStorage {
 
     function getContractBalance() public view onlyCreator returns (uint256) {
         return address(this).balance;
+    }
+
+    event CreatorTakeAwayAll(address creator, uint256 amount);
+
+    function creatorTakeAwayAll() public onlyCreator {
+        require(s.paused, "Pause all first");
+        uint256 amount = address(this).balance;
+        AddressUpgradeable.sendValue(payable(s.creator), amount);
+
+        emit CreatorTakeAwayAll(s.creator, amount);
     }
 }
