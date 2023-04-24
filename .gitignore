@@ -21,8 +21,8 @@ dest
 .DS_STORE
 
 node_modules
-package-lock.json
-yarn.lock
+# package-lock.json
+# yarn.lock
 
 .eslintcache
 .parcel-cache
