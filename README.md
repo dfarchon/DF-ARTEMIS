@@ -14,6 +14,8 @@
 
 # DF ARTEMIS
 
+## 0. Introduction
+
 Planet-targeted bounty mercenary system for Dark Forest.
 
 Funder publish task(s) for attacking planet(s).
@@ -28,8 +30,6 @@ use [SubGraph](https://thegraph.com/en/) to query the history log of arrivals to
 the smart contract determine the rules.
 
 中文使用指南： https://www.youtube.com/watch?v=UsrTy-AgXMo
-
-
 
 
 ## 1. Warning 
@@ -54,11 +54,29 @@ Go into one dark forest lobby,  add a new plugin, and input the below code.
 export {default} from "https://cdn.jsdelivr.net/gh/dfarchon/artemis-dest@master/Artemis-v0.0.2.js"
 ```
 
+## 3. How To Develop
 
+Run the command in the repository folder:
+
+```
+df-plugin-dev-server
+```
+
+ Put below content in the Dark Forest UI to load DF ARTEMIS plugin.
+
+```js
+export { default } from "http://127.0.0.1:2222/ArtemisPlugin.js?dev";
+```
 
 ## 4. Thanks
 
 In the process of developing and testing DF ARTEMIS,  we would like to express our heartfelt thanks to all the friends who provided us with help and feedback.
+
+Special thanks to **ZKForest Community**, which give me a lot of support.
+
+Speical thanks to **Project Sophon**, which is the development team of [df-plugin-dev-server](
+https://github.com/projectsophon/df-plugin-dev-server).
+
 
 Special thanks to [DarkSea](https://github.com/snowtigersoft/darksea-market)'s developer @snowtigersoft, who enthusiastically answered all questions about smart contracts.
 
@@ -72,8 +90,11 @@ https://github.com/snowtigersoft/darksea-market
 
 https://github.com/dfarchon/DF-GAIA
 
+https://github.com/projectsophon/df-plugin-dev-server
+
 
 ## License
 
 GNU General Public License v3.0
+
 
