@@ -1,7 +1,7 @@
 {
     "name": "df-artemis",
-    "version": "1.0.0",
-    "description": "",
+    "version": "0.0.3",
+    "description": "Planet-targeted bounty mercenary system for Dark Forest",
     "main": "index.js",
     "scripts": {
         "test": "hardhat test",
@@ -21,7 +21,7 @@
         "start": "df-plugin-dev-server --glob plugins/*.jsx",
         "build": "df-plugin-dev-server bundle --glob plugins/*.jsx --outdir=dest/"
     },
-    "author": "DfArchon",
+    "author": "DF Archon",
     "license": "GPL-3.0",
     "devDependencies": {
         "@darkforest_eth/constants": "^6.7.29",
@@ -34,6 +34,7 @@
         "@nomicfoundation/hardhat-toolbox": "^1.0.2",
         "@nomiclabs/hardhat-ethers": "^2.1.1",
         "@nomiclabs/hardhat-etherscan": "^3.1.0",
+        "@openzeppelin/contracts-upgradeable": "^4.8.3",
         "@projectsophon/df-plugin-dev-server": "^1.5.0",
         "@typechain/ethers-v5": "^10.1.0",
         "@typechain/hardhat": "^6.1.2",
@@ -58,8 +59,6 @@
         "typechain": "^8.1.0",
         "typescript": "^4.7.4",
         "urql": "^3.0.1"
-    },
-    "dependencies": {
-        "@openzeppelin/contracts-upgradeable": "^4.7.3"
     }
 }
+
