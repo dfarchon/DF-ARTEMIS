@@ -31,6 +31,14 @@ const mainnet = {
     chainId: 1,
 }
 
+const redstoneTestnet = {
+    url: process.env.REDSTONE_TESTNET_RPC_URL,
+    accounts: {
+      mnemonic: process.env.DEPLOYER_MNEMONIC,
+    },
+    chainId: Number(process.env.REDSTONE_TESTNET_CHAINID),
+  };
+
 const config: HardhatUserConfig = {
     defaultNetwork: "hardhat",
     networks: {
@@ -39,6 +47,7 @@ const config: HardhatUserConfig = {
         // > Error HH100: Network xdai doesn't exist
         ...(DEPLOYER_MNEMONIC ? {xdai} : undefined),
         ...(DEPLOYER_MNEMONIC ? {mainnet} : undefined),
+        ...(DEPLOYER_MNEMONIC ? { redstoneTestnet } : undefined),
         localhost: {
             url: "http://localhost:8545/",
             accounts: {

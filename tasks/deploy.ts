@@ -3,10 +3,18 @@ import { ethers } from "hardhat";
 async function main() {
 
   const [deployer] = await ethers.getSigners();
+
+
+  console.log(
+    "Deploying contracts with the account:",
+    deployer.address
+  );
+
   const beginBalance = await deployer.getBalance();
 
   
   console.log("begin balance:", (beginBalance.toString()));
+
   const ArtemisTask = await ethers.getContractFactory("ArtemisTask");
   const artemisTask = await ArtemisTask.deploy();
   console.log("artemisTask addr:");
@@ -22,23 +30,24 @@ async function main() {
   const artemis = await Artemis.deploy();
   console.log('artemis address:');
   console.log(artemis.address);
-  console.log('gasPrice:')
-  console.log(artemis.deployTransaction.gasPrice);
 
   await artemis.deployed();
   console.log("deploy finished");
 
-
   const endBalance = await deployer.getBalance();
   console.log("end balance:", endBalance.toString());
 
-  const cost = beginBalance.sub(endBalance);
+  const cost = endBalance.sub(beginBalance);
 
   console.log('cost:',cost.toString(),' wei');
   const gweiAmount = ethers.utils.formatUnits(cost, 'gwei');
   console.log(gweiAmount,'gwei');
   const ethAmount = ethers.utils.formatUnits(cost);
   console.log(ethAmount,'eth');
+
+
+
+
 }
 
 
