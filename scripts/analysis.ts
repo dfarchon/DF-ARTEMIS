@@ -11,8 +11,9 @@ async function main() {
     const creator = new ethers.Wallet(ARTEMIS_CREATOR_PRIVATE_KEY!, ethers.provider)
 
     // v0.0.2
-    const artemisAddress = "0xEe2A8A1ccF2D422b92c78cfb850b1E6BCC5A37eC"
-
+    // const artemisAddress = "0xEe2A8A1ccF2D422b92c78cfb850b1E6BCC5A37eC"
+    // const artemisAddress = "0x8B81fdEa2fF97aC75570985946A8fe38bB9B0B75";
+    const artemisAddress = "0xDCf0e438c10Deb6e37bd09E0439e4FA5C16f5BBE";
     const artemisContract = new ethers.Contract(artemisAddress, artemisABI, creator)
 
     const contractOwner = await artemisContract.getCreator()
@@ -53,6 +54,19 @@ async function main() {
 
         const accountSet = new Set()
 
+        console.log('------------------------- Task Payout Total List Begin -------------------------------');
+
+        for(let i = 0;i<tasks.length;i++){
+            const t= tasks[i];
+            const taskId = t.taskId;
+            const payoutTotal = ethers.utils.formatUnits(t.payoutTotal);
+            const funder = t.funder;
+            console.log('TaskID #'+taskId+ " -> funder -> " + funder + " -> " + payoutTotal +' ETH');
+
+        }
+        console.log('------------------------- Task Payout Total List End ---------------------------------');
+
+
         for (let i = 0; i < tasks.length; i++) {
             let t = tasks[i]
             let taskId = t.taskId
@@ -66,6 +80,8 @@ async function main() {
                 let payoutBalance = ethers.utils.formatUnits(t.payoutBalance, "ether")
                 console.log("Task Id " + taskId + " -> funder -> " + t.funder + " -> " + payoutBalance)
             }
+
+            
 
             for (let j = 0; j < mercenaries.length; j++) {
                 let m = mercenaries[j]

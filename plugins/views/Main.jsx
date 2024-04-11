@@ -44,16 +44,17 @@ const Artemis = () => {
     return [
         <ButtonBar key={"bar"}>
             <button onClick={() => setTab("welcome")} style={tab === "welcome" ? activeButton : normalButton}>
+
                 Welcome
             </button>
             <button onClick={() => setTab("funder")} style={tab === "funder" ? activeButton : normalButton}>
-                Funder
+            Mastermind
             </button>
             <button onClick={() => setTab("manager")} style={tab === "manager" ? activeButton : normalButton}>
-                Manager
+            Middleman
             </button>
             <button onClick={() => setTab("mercenary")} style={tab === "mercenary" ? activeButton : normalButton}>
-                Mercenary
+            Hunter
             </button>
 
             {isAdmin ? (

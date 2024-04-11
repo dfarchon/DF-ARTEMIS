@@ -16,7 +16,6 @@ library ArtemisTask {
         uint256 planetId,
         uint256 payout,
         uint256 x,
-        address manager,
         uint256 durationTime,
         address[] memory blacklist
     ) public returns (uint256) {
@@ -31,7 +30,7 @@ library ArtemisTask {
         task.beginTime = block.timestamp;
         task.durationTime = durationTime;
         task.x = x;
-        task.manager = manager;
+        task.manager = s().lobbies[addr].admin;
         task.blacklist = blacklist;
         address banAcount;
         for (uint256 i = 0; i < blacklist.length; i++) {
@@ -74,17 +73,17 @@ library ArtemisTask {
         task.durationTime = durationTime;
     }
 
-    function funderChangeX(
-        address addr,
-        uint256 taskId,
-        uint256 x
-    ) public {
-        ArtemisTypes.Task storage task = s().lobbies[addr].tasks[taskId];
-        require(task.funder == msg.sender, "only funder");
-        require(x != 0, "x can't be 0");
-        require(task.x < x, "x only can be bigger");
-        task.x = x;
-    }
+    // function funderChangeX(
+    //     address addr,
+    //     uint256 taskId,
+    //     uint256 x
+    // ) public {
+    //     ArtemisTypes.Task storage task = s().lobbies[addr].tasks[taskId];
+    //     require(task.funder == msg.sender, "only funder");
+    //     require(x != 0, "x can't be 0");
+    //     require(task.x < x, "x only can be bigger");
+    //     task.x = x;
+    // }
 
     function mercenaryClaim(
         address addr,

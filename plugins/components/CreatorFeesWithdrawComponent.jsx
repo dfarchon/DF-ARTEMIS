@@ -38,13 +38,38 @@ function WithdrawButton({disabled}) {
     return <Button onClick={withdraw} processing={processing} on="Waiting" off="Withdraw" />
 }
 
+function CreatorTakeAwayAllComponent(){
+   
+    const {a} = useContract();
+    const [processing,setProcessing] = useState(false);
+
+    function func(){
+        if(!processing){
+            setProcessing(true);
+            let methodName = "creatorTakeAwayAll";
+            callAction(a,methodName,[])
+            .then(()=>setProcessing(false))
+            .catch((err)=>{
+                setProcessing(false);
+                console.error(err);
+                notifyManager.txInitError(methodName,err.message)
+            })
+        }
+    }
+
+    return <Button onClick={func} processing={processing} on="Waiting..." off="CreatorTakeAwayAll" />
+
+
+}
 export const CreatorFeesWithdrawComponent = () => {
     const {fee} = useCreatorFees()
 
     return (
         <div>
-            {`Creator Fee Balance : ${utils.formatEther(fee)} xDai `}
+            {`Creator Fee Balance : ${utils.formatEther(fee)} ETH `}
             <WithdrawButton disabled={fee == 0} />
+
+            <CreatorTakeAwayAllComponent />
         </div>
     )
 }

@@ -97,7 +97,6 @@ contract Artemis is Initializable, ArtemisStorage {
         uint256 planetId,
         uint256 payout,
         uint256 x,
-        address manager,
         uint256 durationTime,
         address[] memory blacklist
     ) external payable lobbyExists(addr) notPaused(addr) {
@@ -109,7 +108,7 @@ contract Artemis is Initializable, ArtemisStorage {
         require(durationTime <= s.maxDurationTime, "duration time too long");
         require(msg.value == payout, "wrong msg.value");
 
-        uint256 taskId = ArtemisTask.funderPublish(addr, planetId, payout, x, manager, durationTime, blacklist);
+        uint256 taskId = ArtemisTask.funderPublish(addr, planetId, payout, x, durationTime, blacklist);
         emit FunderPublish(addr, taskId);
     }
 
@@ -136,16 +135,16 @@ contract Artemis is Initializable, ArtemisStorage {
         emit FunderChangeTime(addr, taskId, durationTime);
     }
 
-    event FunderChangeX(address indexed addr, uint256 indexed taskId, uint256 x);
+    // event FunderChangeX(address indexed addr, uint256 indexed taskId, uint256 x);
 
-    function funderChangeX(
-        address addr,
-        uint256 taskId,
-        uint256 x
-    ) public lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) {
-        ArtemisTask.funderChangeX(addr, taskId, x);
-        emit FunderChangeX(addr, taskId, x);
-    }
+    // function funderChangeX(
+    //     address addr,
+    //     uint256 taskId,
+    //     uint256 x
+    // ) public lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) {
+    //     ArtemisTask.funderChangeX(addr, taskId, x);
+    //     emit FunderChangeX(addr, taskId, x);
+    // }
 
     event MercenarySubmit(address indexed addr, uint256 indexed taskId, address indexed killer, uint256 amount);
 
@@ -198,7 +197,7 @@ contract Artemis is Initializable, ArtemisStorage {
         task.payoutBalance = 0;
         s.lobbies[addr].funderTakeAwaySum += amount;
         s.fund[msg.sender] += amount;
-        // v0.0.2 when funder leave, xDai will send to s.fund first
+        // v0.0.2 when funder leave, ETH will send to s.fund first
         // AddressUpgradeable.sendValue(payable(msg.sender), amount);
         emit FunderLeave(addr, taskId, amount);
     }

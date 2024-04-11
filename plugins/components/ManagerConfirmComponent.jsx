@@ -9,7 +9,8 @@ import {Btn} from "./Btn"
 import {ButtonGroup, Separator} from "./CoreUI"
 import {Button} from "./Button"
 import {BigNumber, utils} from "ethers"
-import {querySubgraph} from "../helpers/subgraph"
+// import {querySubgraph} from "../helpers/subgraph"
+import { analysis } from "../helpers/arrivalAnalysis"
 
 // function adminConfirm(
 //     address addr,
@@ -21,8 +22,8 @@ import {querySubgraph} from "../helpers/subgraph"
 //     emit AdminConfirm(addr, taskId, killer, amount);
 // }
 
-const fi = {width: "150px"}
-const se = {width: "150px"}
+const fi = {width: "120px"}
+const se = {width: "120px"}
 const th = {width: "60px", display: "inline-block"}
 const fo = {width: "60px", display: "inline-block"}
 
@@ -30,6 +31,7 @@ const ManagerConfirmForOne = ({t, account}) => {
     const {a} = useContract()
 
     const [mercenarySubmitAmount, setMercenarySubmitAmount] = useState(undefined)
+    const [managerConfirmAmount,setManagerConfirmAmount] = useState(undefined)
     const [managerQueryAmount, setManagerQueryAmount] = useState(undefined)
     const [processing, setProcessing] = useState(false)
 
@@ -41,9 +43,14 @@ const ManagerConfirmForOne = ({t, account}) => {
             let submitAmount = await a.getMercenarySubmitAmount(addr, t.taskId, account)
             let _ = utils.formatEther(submitAmount)
 
+            let confirmAmount = await a.getManagerConfirmAmount(addr,t.taskId,account)
+            let __ = utils.formatEther(confirmAmount)
+
+            setManagerConfirmAmount(__)
+
             setMercenarySubmitAmount(_)
 
-            let {amount, energyOfMe, energySum, energyCounted, energyPayoutLimit} = await querySubgraph(t, account)
+            let {amount, energyOfMe, energySum, energyCounted, energyPayoutLimit} = await analysis(t, account)
 
             if (amount === undefined) {
                 alert("Subgraph Query Fail")
@@ -60,6 +67,12 @@ const ManagerConfirmForOne = ({t, account}) => {
         if (mercenarySubmitAmount === undefined) {
             alert("Please Query First")
             return
+        }
+
+        if(managerConfirmAmount!==undefined && managerConfirmAmount === managerQueryAmount ){
+            alert('manager already confirm')
+
+            return;
         }
 
         if (+mercenarySubmitAmount > +managerQueryAmount) {
@@ -93,8 +106,10 @@ const ManagerConfirmForOne = ({t, account}) => {
 
     return (
         <tr key={t.taskId + account}>
-            <th style={fi}> {mercenarySubmitAmount === undefined ? "?" : mercenarySubmitAmount} xDai </th>
-            <th style={se}> {managerQueryAmount === undefined ? "?" : managerQueryAmount} xDai</th>
+            <th style={fi}> {mercenarySubmitAmount === undefined ? "?" : mercenarySubmitAmount} ETH </th>
+            <th style={se}> {managerConfirmAmount === undefined ? "?" : managerConfirmAmount} ETH</th>
+
+            <th style={se}> {managerQueryAmount === undefined ? "?" : managerQueryAmount} ETH</th>
 
             <th style={th}>
                 <Btn className="btn" disabled={processing} onClick={query}>
@@ -130,8 +145,8 @@ export const ManagerConfirmComponent = ({t}) => {
                         <thead>
                             <tr>
                                 <th style={fi}> Mercenary Submit </th>
+                                <th style={se}> Manager Confirm </th>
                                 <th style={se}> Manager Query </th>
-
                                 <th style={th}> </th>
                                 <th style={fo}> </th>
                             </tr>

@@ -47,7 +47,7 @@ export function AdminWithdrawComponent() {
 
     return (
         <div style={{textAlign: "center"}}>
-            {`Admin Fee Balance: ${utils.formatEther(fee)} xDai `}
+            {`Admin Fee Balance: ${utils.formatEther(fee)} ETH `}
             <WithdrawButton disabled={fee == 0} />
         </div>
     )

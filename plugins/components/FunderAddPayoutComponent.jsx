@@ -6,9 +6,48 @@ import {LOBBY_CONTRACT_ADDRESS, notifyManager, own} from "../constants"
 import {useContract} from "../helpers/AppHooks"
 import {Input} from "./Input"
 import {Btn} from "./Btn"
-import {ButtonGroup, Separator} from "./CoreUI"
-import {Button} from "./Button"
 import {BigNumber, utils} from "ethers"
+import { EmSpacer } from "./CoreUI"
+
+const SectionHeader = styled.div`
+    color: "color(" #bbb ").hex()";
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline;
+    margin-bottom: 3px;
+    display: block;
+`
+
+const Section = styled.div`
+    padding: 5px 0;
+
+    &:first-child {
+        margin-top: -3px;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+`
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    & > span:first-child {
+        /* flex-grow: 1; */
+        width: "100px";
+    }
+
+    & > span:second-child {
+        width: "400px";
+    }
+`
 
 const fi = {
     width: "100px",
@@ -101,24 +140,35 @@ export const FunderAddPayoutComponent = ({t}) => {
 
     return (
         <div>
-            <span style={fi}> New Payout (xDai)</span>{" "}
-            <span style={se}>
-                <Input
-                    placeholder="xDai"
-                    wide={true}
-                    type="number"
-                    value={payout}
-                    onChange={changePayout}
-                    onKeyUp={onKeyUp}
-                    step={0.1}
-                />
-            </span>{" "}
-            {/* <span style={th}> </span> */}
-            <span style={th}>
-                <Btn className="btn" disabled={processing} style={th} onClick={save}>
-                    {"Set New Payout"}
+            <Section>
+                <SectionHeader> Add Reward (ETH) </SectionHeader>
+                <Row>
+                    <span>
+                        Add reward amount: {payout} ETH
+                    </span>
+                    <span>
+                    <Input
+                        placeholder="ETH"
+                        wide={true}
+                        type="number"
+                        value={payout}
+                        onChange={changePayout}
+                        onKeyUp={onKeyUp}
+                        step={0.001}
+                        style={{width:'200px'}}
+                    />
+                    </span>
+                    
+                </Row>
+                <EmSpacer height='10px' />
+                <div>
+                <Btn className="btn" disabled={processing}  onClick={save} wide='500px'>
+                    Add Mission Reward
                 </Btn>
-            </span>
+                </div>
+            </Section>
+      
+            
         </div>
     )
 }

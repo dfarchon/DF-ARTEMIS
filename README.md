@@ -22,7 +22,7 @@ Funder publish task(s) for attacking planet(s).
 
 Mercenaries attack the planet(s) to get reward.
 
-Manager confirm the result and distribute xDai.
+Manager confirm the result and distribute ETH.
 
 use [SubGraph](https://thegraph.com/en/) to query the history log of arrivals to one planet.
 

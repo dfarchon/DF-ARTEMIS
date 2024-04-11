@@ -38,7 +38,7 @@ export function LegendaryLabelText({ text }: { text: string }) {
 
 function ArtemisLabelRaw() {
     return (
-        <LegendaryLabelText text={"DF-ARTEMIS"} />
+        <LegendaryLabelText text={"🥷 BOUNTY HUNTER PROTOCOL"} />
     );
 }
 

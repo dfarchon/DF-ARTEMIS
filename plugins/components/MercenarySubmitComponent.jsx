@@ -2,13 +2,35 @@ import React, {useState} from "react"
 import {utils} from "ethers"
 import {textCenter, table} from "../helpers/styles"
 import {LOBBY_CONTRACT_ADDRESS, notifyManager, own} from "../constants"
-import {querySubgraph} from "../helpers/subgraph"
+// import {querySubgraph} from "../helpers/subgraph"
+import { analysis } from "../helpers/arrivalAnalysis"
 import {callAction} from "../helpers/helpers"
 import {useContract} from "../helpers/AppHooks"
 import {Btn} from "./Btn"
+import styled from "styled-components"
+
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    & > span:first-child {
+        /* flex-grow: 1; */
+        width: '100px';
+    }
+
+    & > span:second-child{
+        width: '400px';
+    }
+`
 
 const fi = {
-    textAlign: "right",
+    textAlign: "left",
     width: "200px",
     display: "inline-block",
 }
@@ -25,12 +47,29 @@ export const MercenarySubmitComponent = ({t}) => {
     const [energySum, setEnergySum] = useState(undefined)
     const [energyBonusLimit, setEnergyBonusLimit] = useState(undefined)
     const [processing, setProcessing] = useState(false)
+    const [mercenarySubmitAmount, setMercenarySubmitAmount] = useState(undefined)
+    const [managerConfirmAmount,setManagerConfirmAmount] = useState(undefined)
+
 
     async function query() {
         if (!processing) {
             setProcessing(true)
 
-            let {amount, energyOfMe, energySum, energyPayoutLimit} = await querySubgraph(t, own)
+            let addr = LOBBY_CONTRACT_ADDRESS
+            let account = df.getAccount();
+
+            let submitAmount = await a.getMercenarySubmitAmount(addr, t.taskId, account)
+            let _ = utils.formatEther(submitAmount)
+
+            let confirmAmount = await a.getManagerConfirmAmount(addr,t.taskId,account)
+            let __ = utils.formatEther(confirmAmount)
+
+            setManagerConfirmAmount(__)
+
+            setMercenarySubmitAmount(_)
+
+
+            let {amount, energyOfMe, energySum, energyPayoutLimit} = await analysis(t, own)
 
             if (amount === undefined) {
                 alert("subgraph query fail")
@@ -62,6 +101,10 @@ export const MercenarySubmitComponent = ({t}) => {
             return
         }
 
+        if(amount === mercenarySubmitAmount){
+            alert('you have already submitted, waiting for the response for middleman');
+        }
+
         if (processing) return
         setProcessing(true)
 
@@ -85,33 +128,60 @@ export const MercenarySubmitComponent = ({t}) => {
             })
     }
 
+    //generate by chatgpt 3.5
+    function formatIntegerWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+
     return (
         <div>
             <div style={textCenter}>
-                <div>
-                    <span style={fi}> Your Total Payout: </span>
-                    <span style={se}> {amount === undefined ? "?" : amount} xDai </span>
-                </div>
-                <div>
-                    <span style={fi}> Your Energy Sent: </span>
 
-                    <span style={se}>{myEnergySum === undefined ? "?" : myEnergySum.toLocaleString()}</span>
-                </div>
-                <div>
+                <Row>
+                    <span > Your Submit: </span>
+                    <span > {mercenarySubmitAmount === undefined ? "?" : mercenarySubmitAmount} ETH </span>
+                </Row>
+
+
+
+                <Row>
+                    <span > Middleman Confirm: </span>
+                    <span > {managerConfirmAmount === undefined ? "?" : managerConfirmAmount} ETH </span>
+                </Row>
+
+                <Row>
+                    <span > Your Reward: </span>
+                    <span > {amount === undefined ? "?" : amount} ETH </span>
+                </Row>
+                <Row>
+                    <span > Your Energy Sent: </span>
+
+                    <span >{myEnergySum === undefined ? "?" : myEnergySum.toLocaleString()}</span>
+                </Row>
+                <Row>
                     {" "}
-                    <span style={fi}>Total Mercenaries Sent:</span>
-                    <span style={se}>{energySum === undefined ? "?" : energySum.toLocaleString()}</span>
-                </div>
-                <div>
-                    <span style={fi}>Total Energy Needed:</span>
-                    <span style={se}>{energyBonusLimit === undefined ? "?" : energyBonusLimit.toLocaleString()}</span>
-                </div>
-                <Btn className="btn" disabled={processing} onClick={query}>
-                    {"query"}
-                </Btn>{" "}
-                <Btn className="btn" disabled={processing} onClick={claim}>
-                    {"claim"}
+                    <span >Total Assaissn Sent: </span>
+                    <span >{energySum === undefined ? "?" : energySum.toLocaleString()}</span>
+                </Row>
+                <Row>
+                    <span>Total Energy Needed:</span>
+                    <span >{energyBonusLimit === undefined ? "?" : formatIntegerWithCommas(energyBonusLimit)}</span>
+                </Row>
+
+                <Row>
+                   
+                    <Btn className="btn" disabled={processing} onClick={query} wide="48%">
+                       query
+                        </Btn>
+
+                    
+
+                    <Btn className="btn" disabled={processing} onClick={claim} wide="48%">
+                     claim
                 </Btn>
+                    
+                </Row>
+               
             </div>
         </div>
     )

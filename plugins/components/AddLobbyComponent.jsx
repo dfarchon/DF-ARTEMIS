@@ -15,7 +15,7 @@ export const AddLobbyComponent = () => {
 
         let addr_ = LOBBY_CONTRACT_ADDRESS
         let admin_ = own
-        let fee_ = 100
+        let fee_ = 0
 
         let methodName = "addLobby"
         let input = [addr_, admin_, fee_]

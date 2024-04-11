@@ -50,12 +50,12 @@ export function FooterPanel() {
 
     return (
         <FooterBar>
-            {`Balance: ${utils.formatEther(balance)} xDai `}
+            {`Balance: ${utils.formatEther(balance)} ETH `}
 
             <WithdrawButton disabled={balance == 0} />
 
             <Support>
-                <a href="https://discord.com/invite/vXCJKfT6a2" target="_blank">
+                <a href="https://discord.gg/XpBPEnsvgX" target="_blank">
                     Get Support
                 </a>
             </Support>

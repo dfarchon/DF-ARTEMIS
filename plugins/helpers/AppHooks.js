@@ -232,7 +232,7 @@ export function useAllTasks(a, poll) {
         }
 
         let amount = utils.formatEther(addPayoutAmount)
-        notify(`Funder Add Payout: Task #${taskId} ${amount} xDai`)
+        notify(`Funder Add Payout: Task #${taskId} ${amount} ETH`)
     }
 
     async function onMercenarySubmit(addr, taskId, killer, amount) {
@@ -243,7 +243,7 @@ export function useAllTasks(a, poll) {
 
         let showAddress = killer.slice(0, 10)
         let showAmount = utils.formatEther(amount)
-        notify(`Mercenary Submit: Task #${taskId} Mercenary ${showAddress} Claim ${showAmount} xDai`)
+        notify(`Mercenary Submit: Task #${taskId} Mercenary ${showAddress} Claim ${showAmount} ETH`)
     }
 
     async function onGiveTips(addr, from, to, amount) {
@@ -256,7 +256,7 @@ export function useAllTasks(a, poll) {
         let showFrom = from.slice(0, 10)
         let showTo = to.slice(0, 10)
         let showAmount = utils.formatEther(amount)
-        notify(`Give Tips: ${showFrom} to ${showTo} ${showAmount} xDai`)
+        notify(`Give Tips: ${showFrom} to ${showTo} ${showAmount} ETH`)
     }
 
     async function onManagerConfirm(addr, taskId, killer, amount) {
@@ -268,7 +268,7 @@ export function useAllTasks(a, poll) {
 
         let showAddress = killer.slice(0, 10)
         let showAmount = utils.formatEther(amount)
-        notify(`task #${taskId} Manager Confirm Mercenary ${showAddress} for ${showAmount} xDai`)
+        notify(`task #${taskId} Manager Confirm Mercenary ${showAddress} for ${showAmount} ETH`)
     }
 
     async function onFunderLeave(addr, taskId, amount) {
@@ -280,7 +280,7 @@ export function useAllTasks(a, poll) {
 
         // let showAddress = killer.slice(0,10);
         let showAmount = utils.formatEther(amount)
-        notify(`Funder Leave : Task #${taskId} Get Back ${showAmount} xDai`)
+        notify(`Funder Leave : Task #${taskId} Get Back ${showAmount} ETH`)
     }
 
     useEffect(() => {

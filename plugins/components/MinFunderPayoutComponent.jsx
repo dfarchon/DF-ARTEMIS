@@ -54,7 +54,7 @@ export const MinFunderPayoutComponent = ({a, minFunderPayout, maxFunderPayout}) 
 
     return (
         <div style={ze}>
-            <span style={fi}> Min Funder Payout (xDai) </span>{" "}
+            <span style={fi}> Min Funder Payout (ETH) </span>{" "}
             <span style={se}>
                 <Input
                     placeholder="%"

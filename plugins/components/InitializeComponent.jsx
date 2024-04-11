@@ -24,12 +24,12 @@ export const InitializeComponent = () => {
         //     address creator
         // ) public initializer
 
-        let creatorFee = 1000
-        let managerFee = 1000
+        let creatorFee = 500
+        let managerFee = 500
         let minDurationTime = 60 * 5
         let maxDurationTime = 60 * 60 * 24
-        let minFunderPayout = utils.parseEther("0.1")
-        let maxFunderPayout = utils.parseEther("1000")
+        let minFunderPayout = utils.parseEther("0.0005")
+        let maxFunderPayout = utils.parseEther("100")
         let maxFee = 2000
         let creator = own
 

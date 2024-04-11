@@ -9,6 +9,7 @@ async function main() {
   console.log("begin balance:", (beginBalance.toString()));
   const ArtemisTask = await ethers.getContractFactory("ArtemisTask");
   const artemisTask = await ArtemisTask.deploy();
+  await artemisTask.deployed();
   console.log("artemisTask addr:");
   console.log(artemisTask.address);
 
@@ -20,13 +21,15 @@ async function main() {
   });
 
   const artemis = await Artemis.deploy();
+  await artemis.deployed();
+  console.log("deploy finished");
+
   console.log('artemis address:');
   console.log(artemis.address);
   console.log('gasPrice:')
   console.log(artemis.deployTransaction.gasPrice);
 
-  await artemis.deployed();
-  console.log("deploy finished");
+
 
 
   const endBalance = await deployer.getBalance();

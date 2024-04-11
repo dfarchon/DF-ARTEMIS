@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import {textCenter} from "../helpers/styles"
 import styled from "styled-components"
 import {useContract} from "../helpers/AppHooks"
@@ -19,21 +19,34 @@ const warning = {
 export function WelcomePanel() {
     const {creatorFee, adminFee, managerFee, maxFee, isLobbyExists} = useContract()
 
+    const fee = useMemo(()=>{
+        return creatorFee+adminFee+managerFee;
+    },[creatorFee,adminFee,managerFee]);
+
     return (
         <div style={textCenter}>
             <div style={font}>
                 <ArtemisLabel />
             </div>
 
-            <div style={{color: "gold"}}>{version}</div>
+            <div style={{color: "gold"}}>{version} / Total Fee: {fee}%</div>
             {isLobbyExists ? (
                 <div>
-                    <div>the smart contract and plugin have not been audited</div>
-                    <div>you may lost your xdai or private key</div>
+                     
+
+                    <div >
+                        <div>💰 Mastermind offers a planet reward.</div>
+                        <div>🥷 Hunter sends energy to the target planet. </div>
+                        <div>👨‍💼 Middleman contacts mastermind & hunter. </div>
+                        
+                       
+                    </div>
                     <RiskLabel />
-                    <div> Creator Fee: {creatorFee} % </div>
-                    <div> Admin Fee: {adminFee} % </div>
-                    <div> manager Fee: {managerFee} % </div>
+
+                    <div>
+                        <div>This is an experimental application & has not been audited. </div>
+                        <div> Please refrain from depositing large amounts of ETH. </div>
+                    </div>
                 </div>
             ) : (
                 <div>

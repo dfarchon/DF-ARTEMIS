@@ -118,7 +118,7 @@ export async function querySubgraph(t, account) {
 
     let amount = utils.formatEther(x.mul(energyOfMe).toString())
     // A has account
-    // A can claim ${amount} xDai
+    // A can claim ${amount} ETH
     // A sent ${energyOfMe} energy
     // planet (ID is planetId) recevied energySum energy
     // ${energyPayoutLimit} energy are needed

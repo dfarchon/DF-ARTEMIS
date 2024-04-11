@@ -5,6 +5,31 @@ import {usePause} from "../helpers/AppHooks"
 import {Loading} from "../components/Loading"
 import {FunderPublishPanel} from "./FunderPublishPanel"
 import {ListingPanel} from "./ListingPanel"
+import { Btn } from "../components/Btn";
+import { Spacer,EmSpacer } from "../components/CoreUI";
+
+
+const Content = styled.div`
+  width: 530px;
+  margin-left: 10px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  /* text-align: justify; */
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  align-items: center;
+
+  & > span:first-child {
+    flex-grow: 1;
+  }
+`;
+
 
 const ButtonBar = styled.div`
     display: flex;
@@ -21,14 +46,10 @@ const MainDiv = styled.div`
 const activeButton = {
     background: "#fff",
     color: "#000",
-    width: "200px",
-    height: "30px",
     textAlign: "center",
 }
 
 const normalButton = {
-    width: "200px",
-    height: "30px",
     textAlign: "center",
 }
 
@@ -44,18 +65,31 @@ export const FunderPanel = () => {
             <div style={{fontSize: "30px"}}> DF ARTEMIS IS PAUSED NOW</div>
         </div>
     ) : (
-        <div style={{...textCenter, ...ze}}>
-            <ButtonBar key={"funderButtonBar"}>
-                <button onClick={() => setTab("publish")} style={tab === "publish" ? activeButton : normalButton}>
-                    New Task
-                </button>
-                <button onClick={() => setTab("query")} style={tab === "query" ? activeButton : normalButton}>
-                    Current Task(s)
-                </button>
-            </ButtonBar>
-            <MainDiv key="funderMainDiv">
+
+        <Content>
+         
+  
+    
+           <Row>
+              <Btn onClick={() => setTab("publish")}  wide={'40%'} style={ tab==='publish'?activeButton:normalButton}>
+                Publish Mission
+              </Btn>
+              <Spacer width={16} />
+
+              <Btn  onClick={() =>setTab("query")} wide={'40%'} style={tab==='query'?activeButton:normalButton}>
+                Mission Records
+              </Btn>
+              
+           </Row>
+   
+
+           <Row>
+              <MainDiv key="funderMainDiv">
                 {tab === "publish" ? <FunderPublishPanel /> : <ListingPanel state={1} />}
-            </MainDiv>
-        </div>
+              </MainDiv>
+           </Row>
+        </Content>
     )
 }
+
+

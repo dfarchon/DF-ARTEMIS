@@ -10,22 +10,7 @@ import {ButtonGroup, Separator} from "./CoreUI"
 import {Button} from "./Button"
 import {BigNumber, utils} from "ethers"
 
-const fi = {
-    width: "100px",
-    textAlign: "right",
-}
 
-const se = {
-    width: "80px",
-    textAlign: "center",
-}
-
-const th = {
-    width: "140px",
-}
-const fo = {
-    width: "410px",
-}
 
 export const FunderLeaveComponent = ({t}) => {
     let addr = LOBBY_CONTRACT_ADDRESS
@@ -61,8 +46,8 @@ export const FunderLeaveComponent = ({t}) => {
 
     return (
         <div style={{padding: "5px"}}>
-            <Btn className="btn" disabled={processing} style={fo} onClick={funderLeave}>
-                {"Funder Cancel Task"}
+            <Btn disabled={processing}  onClick={funderLeave} wide='100%'>
+                Mastermind end this mission
             </Btn>
         </div>
     )

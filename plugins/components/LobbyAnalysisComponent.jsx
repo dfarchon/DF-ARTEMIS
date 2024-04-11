@@ -66,41 +66,41 @@ export const LobbyAnalysisComponenet = () => {
                 <div>
                     <span style={fi}>Funder Payout Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{funderPayoutSum === undefined ? "?" : funderPayoutSum} xDai</span>
+                    <span style={th}>{funderPayoutSum === undefined ? "?" : funderPayoutSum} ETH</span>
                 </div>
                 <div>
                     <span style={fi}>Funder Take Away Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{funderTakeAwaySum === undefined ? "?" : funderTakeAwaySum} xDai</span>
+                    <span style={th}>{funderTakeAwaySum === undefined ? "?" : funderTakeAwaySum} ETH</span>
                 </div>
 
                 <div>
                     <span style={fi}>Creator Fees Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{creatorFeesSum === undefined ? "?" : creatorFeesSum} xDai</span>
+                    <span style={th}>{creatorFeesSum === undefined ? "?" : creatorFeesSum} ETH</span>
                 </div>
 
                 <div>
                     <span style={fi}>Admin Fees Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{adminFeesSum === undefined ? "?" : adminFeesSum} xDai</span>
+                    <span style={th}>{adminFeesSum === undefined ? "?" : adminFeesSum} ETH</span>
                 </div>
 
                 <div>
                     <span style={fi}>Manager Fees Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{managerFeesSum === undefined ? "?" : managerFeesSum} xDai</span>
+                    <span style={th}>{managerFeesSum === undefined ? "?" : managerFeesSum} ETH</span>
                 </div>
 
                 <div>
                     <span style={fi}>Tips Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{tipsSum === undefined ? "?" : tipsSum} xDai</span>
+                    <span style={th}>{tipsSum === undefined ? "?" : tipsSum} ETH</span>
                 </div>
                 <div>
                     <span style={fi}>Mercenaries Salary Sum: </span>
                     <span style={se}> </span>
-                    <span style={th}>{mercenariesSalarySum === undefined ? "?" : mercenariesSalarySum} xDai</span>
+                    <span style={th}>{mercenariesSalarySum === undefined ? "?" : mercenariesSalarySum} ETH</span>
                 </div>
             </div>
         </div>

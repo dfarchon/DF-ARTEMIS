@@ -22,7 +22,7 @@ export const ContractBalanceComponent = () => {
 
     return (
         <div>
-            <span> Contract Balance: {balance === undefined ? "?" : balance} xDai</span>{" "}
+            <span> Contract Balance: {balance === undefined ? "?" : balance} ETH</span>{" "}
             <button onClick={query}>Query</button>
         </div>
     )

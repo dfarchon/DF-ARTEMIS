@@ -16,6 +16,25 @@ import {FunderLeaveComponent} from "../components/FunderLeaveComponent"
 import {MercenarySubmitComponent} from "../components/MercenarySubmitComponent"
 import {ManagerConfirmComponent} from "../components/ManagerConfirmComponent"
 
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    & > span:first-child {
+        /* flex-grow: 1; */
+        width: '100px';
+    }
+
+    & > span:second-child{
+        width: '400px';
+    }
+`
+
 // import { BossAddBonusPanel } from "../components/BossAddBonusPanel";
 // import { BossLeavePanel } from "../components/BossLeavePlanel";
 // import { KillerClaimPanel } from "../components/KillerClaimPanel";
@@ -84,6 +103,7 @@ export function ListingPanel({state}) {
             let payoutBalance = BigNumber.from(t.payoutBalance)
             let x = BigNumber.from(t.x) //x wei/ energy
             let energy = payoutBalance.div(x)
+
             const formatBigNumber = (str) => {
                 if (str.length <= 6) return str
                 let num = str.length - 1
@@ -118,10 +138,13 @@ export function ListingPanel({state}) {
             for (let i = 0; i < blacklist.length; i++) {
                 let account = blacklist[i].toString().toLowerCase()
                 showBlacklist.push(
-                    <div key={t.taskId + "blacklist" + i}>
-                        {" "}
-                        Blacklist #{i}: {account}{" "}
-                    </div>
+                    <Row key={t.taskId+'-blacklist-'+i}>
+                        <span>Blacklist #{i}:</span>
+                        <span>{account} 
+
+                        </span>
+                    </Row>
+                
                 )
             }
 
@@ -145,11 +168,14 @@ export function ListingPanel({state}) {
                     <td> #{t.taskId.toString()}</td>
                     <td>
                         {" "}
-                        <Btn onClick={center}>Center View</Btn>
+                        <Btn style={{width: "100px"}} onClick={center}>
+                            {" "}
+                            Center{" "}
+                        </Btn>
                     </td>
-                    <td> {utils.formatEther(t.payoutBalance)} xDai</td>
+                    <td> {utils.formatEther(t.payoutBalance)} ETH</td>
 
-                    <td> {formatBigNumber(t.x.toString())} </td>
+                    <td> {utils.formatEther(t.x)} </td>
 
                     <td> {formatBigNumber(energy.toString())}</td>
                     <td>
@@ -174,20 +200,43 @@ export function ListingPanel({state}) {
                         style={{...table, backgroundColor: active && active.taskId == t.taskId ? "#252B43" : ""}}
                     >
                         <td colSpan="8">
-                            <div key={t.taskId + "time"}>
-                                {formatTime(beginTime) + " UTC+0 - " + formatTime(endTime) + " UTC+0"}
-                            </div>
+                            <Row key={t.taskId+'-beginTime'}>
+                                <span> Begin Time</span>
+                                <span>{formatTime(beginTime) + " UTC+0"}</span>
+                            </Row>
 
-                            <div key={t.taskId + "now"}>Now:{formatTime(undefined) + " UTC+0"} </div>
-                            <div key={t.taskId + "funder"}>Funder: {t.funder.toString()}</div>
-                            <div key={t.taskId + "manager"}>Manager: {t.manager.toString()}</div>
-                            {showBlacklist}
-                            <div key={t.taskId + "x"}> {utils.formatEther(t.x)} xDai / Energy </div>
-                            <div key={t.taskId + "payout"}>
-                                Payout Balance: {utils.formatEther(t.payoutBalance)} xDai ; Payout Total:{" "}
-                                {utils.formatEther(t.payoutTotal)} xDai
-                            </div>
+                            <Row key={t.taskId+'-endTime'}>
+                                <span> End Time</span>
+                                <span>{formatTime(endTime) + " UTC+0"}</span>
+                            </Row>
+                          
+                           <Row key={t.taskId+'-currentTime'}>
+                                <span>Current Time</span>
+                                <span>{formatTime(undefined) + " UTC+0"}</span>
+                            </Row>
 
+                           <Row  key={t.taskId+'-mastermind'}>
+                                <span>Mastermind</span>
+                                <span>{t.funder.toString()}</span>
+                            </Row>
+
+                           <Row  key={t.taskId+'-middleman'}>
+                                <span>Middleman</span>
+                                <span>{t.manager.toString()}</span>
+                            </Row>
+                               {showBlacklist}
+                            
+                            <Row  key={t.taskId+'-balance/energy'}>
+                                <span>{'Reward <=> Energy'}</span>
+                                <span>{utils.formatEther(t.x*1000) + ' ETH <=> 1000 Energy'} </span>
+
+                            </Row>
+                            
+                            <Row  key={t.taskId+'-reward'}>
+                                <span>Mission Reward Balance / Total</span>
+                                <span>{utils.formatEther(t.payoutBalance)} ETH / {utils.formatEther(t.payoutTotal)} ETH </span>
+                            </Row>
+                          
                             {state === 1 ? <FunderAddPayoutComponent t={t} /> : ""}
                             {state === 1 ? <FunderLeaveComponent t={t} /> : ""}
                             {state === 2 ? <ManagerConfirmComponent t={t} /> : ""}
@@ -214,10 +263,10 @@ export function ListingPanel({state}) {
                 <table style={table}>
                     <thead>
                         <tr>
-                            <th> Task </th>
-                            <th> Selected Planet </th>
+                            <th> Mission </th>
+                            <th> Planet </th>
                             <th> Balance </th>
-                            <th> Pay Rate</th>
+                            <th> Balance/Energy </th>
                             <th> Energy </th>
                             <th> More </th>
                         </tr>

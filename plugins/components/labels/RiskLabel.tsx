@@ -38,7 +38,7 @@ export function LegendaryLabelText({ text }: { text: string }) {
 
 function RiskLabelRaw() {
     return (
-        <LegendaryLabelText text={"USE PLUGIN AT YOUR OWN RISK"} />
+        <LegendaryLabelText text={"RISK WARNING"} />
     );
 }
 

@@ -6,12 +6,54 @@ import {LOBBY_CONTRACT_ADDRESS, notifyManager, own} from "../constants"
 import {useContract} from "../helpers/AppHooks"
 import {Input} from "../components/Input"
 import {Btn} from "../components/Btn"
-import {ButtonGroup, Separator} from "../components/CoreUI"
+import {ButtonGroup, EmSpacer, Separator} from "../components/CoreUI"
 import {Button} from "../components/Button"
 import {BigNumber, utils} from "ethers"
 import {DFInput} from "../components/Input"
-
 import {locationIdToDecStr, locationIdFromDecStr} from "@darkforest_eth/serde"
+import {TextPreview} from "../components/TextPreview"
+
+const SectionHeader = styled.div`
+    color: "color(" #bbb ").hex()";
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline;
+    margin-bottom: 3px;
+    display: block;
+`
+
+const Section = styled.div`
+    padding: 5px 0;
+
+    &:first-child {
+        margin-top: -3px;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+`
+
+const Content = styled.div`
+    width: 530px;
+    margin-left: 10px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    /* text-align: justify; */
+`
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+
+    justify-content: space-between;
+    align-items: center;
+
+    & > span:first-child {
+        flex-grow: 1;
+    }
+`
 
 const ButtonBar = styled.div`
     display: flex;
@@ -26,7 +68,7 @@ const funderPublishFont = {
 }
 
 const buttonStyle = {
-    width: "200px",
+    width: "48%",
     textAlign: "center",
 }
 
@@ -106,7 +148,10 @@ export const FunderPublishPanel = () => {
 
     const getPlanetId = () => {
         let p = ui.getSelectedPlanet()
-        if (p === undefined) return
+        if (p === undefined) {
+            alert("You need to select a planet first 👾")
+            return
+        }
         setPlanetId(p.locationId)
     }
 
@@ -220,7 +265,6 @@ export const FunderPublishPanel = () => {
             locationIdToDecStr(planetId),
             utils.parseEther(payout.toString()),
             x,
-            manager,
             durationTime,
             blacklist,
         ]
@@ -249,58 +293,79 @@ export const FunderPublishPanel = () => {
     }
 
     return (
-        <div style={textCenter}>
+        <div style={{width:'520px'}}>
             {/* <div style={funderPublishFont}>Funder Publish New Contract</div> */}
             {/* planetId */}
-            <div>
-                <Btn onClick={getPlanetId} style={buttonStyle}>
-                    {" "}
-                    Set Selected Planet{" "}
-                </Btn>{" "}
-                <Btn onClick={centerPlanet} style={buttonStyle}>
-                    {" "}
-                    Center Viewport{" "}
-                </Btn>
-                <div>{planetId === undefined ? "The selected planet's ID will show up here" : planetId}</div>
-            </div>
+
+            <Section>
+                <SectionHeader>Set Target Planet</SectionHeader>
+                <Row>
+                    <div> Target Planet Id: </div>
+
+                    <div>
+                        {" "}
+                        {planetId === undefined
+                            ? "(none)"
+                            : planetId.toString().slice(0, 20) + "..." + planetId.toString().slice(-20)}{" "}
+                    </div>
+                </Row>
+
+                <div style={textCenter}>
+                    <Btn onClick={getPlanetId} wide={"40%"} style={buttonStyle}>
+                        Set Target Planet
+                    </Btn>{" "}
+                    <Btn onClick={centerPlanet} wide={"40%"} style={buttonStyle}>
+                        Center Target Planet
+                    </Btn>
+                </div>
+            </Section>
 
             {/* payout */}
-            <div style={ze}>
-                <span style={fi}> Set Payout (xDai) </span>{" "}
-                <span style={se}>
-                    <Input
-                        placeholder="xDai"
-                        isAddress={false}
-                        type="number"
-                        value={payout}
-                        onChange={changePayout}
-                        onKeyUp={onKeyUp}
-                        step={0.1}
-                    />
-                </span>{" "}
-                <span style={th}>
-                    Range is [{minFunderPayout},{maxFunderPayout}]
-                </span>
-            </div>
+
+            <Section>
+                <SectionHeader style={{marginTop: "0px"}}>Set Mission Reward</SectionHeader>
+                <Row>
+                    <span style={th}>
+                        Range is [{minFunderPayout},{maxFunderPayout}] ETH
+                    </span>
+                    <span>
+                        <Input
+                            placeholder="ETH"
+                            isAddress={false}
+                            type="number"
+                            value={payout}
+                            onChange={changePayout}
+                            onKeyUp={onKeyUp}
+                            step={0.0001}
+                            style={{width: "250px"}}
+                        />
+                    </span>
+                </Row>
+            </Section>
 
             {/* energy */}
-            <div style={ze}>
-                <span style={fi}>Set Damage Energy</span>{" "}
-                <span style={se}>
-                    <Input
-                        placeholder="energy"
-                        isAddress={false}
-                        type="number"
-                        value={energy}
-                        onChange={changeEnergy}
-                        onKeyUp={onKeyUp}
-                        step={1000000}
-                    />
-                </span>{" "}
-                <span style={th}>{energy.toLocaleString()}</span>
-            </div>
+            <Section>
+                <SectionHeader style={{marginTop: "0px"}}>Set Expected energy</SectionHeader>
+                <Row>
+                    <span style={th}>Energy: {energy.toLocaleString()}</span>
+                    <span>
+                        <Input
+                            placeholder="ETH"
+                            isAddress={false}
+                            type="number"
+                            value={energy}
+                            onChange={changeEnergy}
+                            onKeyUp={onKeyUp}
+                            step={1000000}
+                            style={{width: "250px"}}
+                        />
+                    </span>
+                </Row>
+            </Section>
+
+            {/* default is creater  */}
             {/* manager */}
-            <div style={{padding: "5px"}}>
+            {/* <div style={{padding: "5px"}}>
                 <span>Set Manager</span>{" "}
                 <DFInput
                     placeholder="address"
@@ -309,28 +374,35 @@ export const FunderPublishPanel = () => {
                     value={manager}
                     onChange={changeManager}
                 />
-            </div>
+            </div> */}
 
             {/* durationTime */}
-            <div style={{textAlign: "left", marginLeft: "50px", padding: "5px"}}>
-                <span> Set Min Cancellation Time (s) </span>{" "}
-                <span style={se}>
-                    <Input
-                        placeholder="xDai"
-                        isAddress={false}
-                        type="number"
-                        value={durationTime}
-                        onChange={changeDurationTime}
-                        onKeyUp={onKeyUp}
-                        step={60}
-                    />
-                </span>{" "}
-                <span>{formatSecond(durationTime)}</span>
-            </div>
+
+            <Section>
+                <SectionHeader style={{marginTop: "0px"}}>Set Duration</SectionHeader>
+                <Row>
+                    <span style={th}>Duration: {formatSecond(durationTime)}</span>
+                    <span>
+                        <Input
+                            placeholder="ETH"
+                            isAddress={false}
+                            type="number"
+                            value={durationTime}
+                            onChange={changeDurationTime}
+                            onKeyUp={onKeyUp}
+                            step={60}
+                            style={{width: "250px"}}
+                        />
+                    </span>
+                </Row>
+            </Section>
+
+            <EmSpacer height='20px'/>
+           
             {/* funder publish */}
-            <div style={{padding: "5px"}}>
-                <Btn disabled={processing} onClick={funderPublish} style={{width: "300px"}}>
-                    Publish New Task
+            <div style={{padding: "0px"}}>
+                <Btn disabled={processing} onClick={funderPublish} wide='50%'>
+                    Publish New Mission
                 </Btn>
             </div>
         </div>
