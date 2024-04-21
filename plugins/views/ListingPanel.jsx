@@ -228,7 +228,7 @@ export function ListingPanel({state}) {
                             
                             <Row  key={t.taskId+'-balance/energy'}>
                                 <span>{'Reward <=> Energy'}</span>
-                                <span>{utils.formatEther(t.x*1000) + ' ETH <=> 1000 Energy'} </span>
+                                <span>{utils.formatEther(t.x.mul(1000)) + ' ETH <=> 1000 Energy'} </span>
 
                             </Row>
                             
