@@ -31,6 +31,12 @@ import "./ArtemisStorage.sol";
 import "./ArtemisTask.sol";
 
 contract Artemis is Initializable, ArtemisStorage {
+
+    modifier disabled() {
+        require(false, "This functionality is disabled for the current round.");
+        _;
+    }
+
     modifier onlyAdmin(address addr) {
         require(s.lobbies[addr].admin == msg.sender, "not admin");
         _;
@@ -118,7 +124,7 @@ contract Artemis is Initializable, ArtemisStorage {
         address addr,
         uint256 taskId,
         uint256 amount
-    ) external payable lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) {
+    ) external payable lobbyExists(addr) notPaused(addr) taskExists(addr, taskId) disabled {
         require(amount == msg.value, "wrong msg.value");
         ArtemisTask.funderAddPayout(addr, taskId, amount);
         emit FunderAddPayout(addr, taskId, amount);

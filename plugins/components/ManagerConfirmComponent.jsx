@@ -10,7 +10,7 @@ import {ButtonGroup, Separator} from "./CoreUI"
 import {Button} from "./Button"
 import {BigNumber, utils} from "ethers"
 // import {querySubgraph} from "../helpers/subgraph"
-import { analysis } from "../helpers/arrivalAnalysis"
+import {analysis} from "../helpers/arrivalAnalysis"
 
 // function adminConfirm(
 //     address addr,
@@ -31,7 +31,7 @@ const ManagerConfirmForOne = ({t, account}) => {
     const {a} = useContract()
 
     const [mercenarySubmitAmount, setMercenarySubmitAmount] = useState(undefined)
-    const [managerConfirmAmount,setManagerConfirmAmount] = useState(undefined)
+    const [managerConfirmAmount, setManagerConfirmAmount] = useState(undefined)
     const [managerQueryAmount, setManagerQueryAmount] = useState(undefined)
     const [processing, setProcessing] = useState(false)
 
@@ -43,7 +43,7 @@ const ManagerConfirmForOne = ({t, account}) => {
             let submitAmount = await a.getMercenarySubmitAmount(addr, t.taskId, account)
             let _ = utils.formatEther(submitAmount)
 
-            let confirmAmount = await a.getManagerConfirmAmount(addr,t.taskId,account)
+            let confirmAmount = await a.getManagerConfirmAmount(addr, t.taskId, account)
             let __ = utils.formatEther(confirmAmount)
 
             setManagerConfirmAmount(__)
@@ -69,10 +69,10 @@ const ManagerConfirmForOne = ({t, account}) => {
             return
         }
 
-        if(managerConfirmAmount!==undefined && managerConfirmAmount === managerQueryAmount ){
-            alert('manager already confirm')
+        if (managerConfirmAmount !== undefined && managerConfirmAmount === managerQueryAmount) {
+            alert("manager already confirm")
 
-            return;
+            return
         }
 
         if (+mercenarySubmitAmount > +managerQueryAmount) {

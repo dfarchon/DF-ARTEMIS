@@ -56,41 +56,38 @@ export const Select = styled.select`
     `}
 `
 
-
 /**
  * Inline block rectangle, measured in ems, default 1em by 1em.
  */
 export const EmSpacer = styled.div`
-  ${({ width, height }) => css`
-    width: ${width === undefined ? '1em' : width};
-    height: ${height === undefined ? '1em' : height};
-    flex-grow: 0;
-    flex-shrink: 0;
-    ${width && !height ? 'display: inline-block;' : ''}
-    ${width ? `width: ${width}em;` : ''}
-    ${height ? `height: ${height}em;min-height:${height}em;` : ''}
-  `}
-`;
-
+    ${({width, height}) => css`
+        width: ${width === undefined ? "1em" : width};
+        height: ${height === undefined ? "1em" : height};
+        flex-grow: 0;
+        flex-shrink: 0;
+        ${width && !height ? "display: inline-block;" : ""}
+        ${width ? `width: ${width}em;` : ""}
+    ${height ? `height: ${height}em;min-height:${height}em;` : ""}
+    `}
+`
 
 export const SectionHeader = styled.div`
- color: 'color('#bbb').hex()';
-  text-decoration: underline;
-  font-weight: bold;
-  display: inline;
-  margin-bottom: 16px;
-  display: block;
-`;
-
+    color: "color(" #bbb ").hex()";
+    text-decoration: underline;
+    font-weight: bold;
+    display: inline;
+    margin-bottom: 16px;
+    display: block;
+`
 
 export const Section = styled.div`
-  padding: 1em 0;
+    padding: 1em 0;
 
-  &:first-child {
-    margin-top: -8px;
-  }
+    &:first-child {
+        margin-top: -8px;
+    }
 
-  &:last-child {
-    border-bottom: none;
-  }
-`;
+    &:last-child {
+        border-bottom: none;
+    }
+`

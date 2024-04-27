@@ -10,8 +10,6 @@ import {ButtonGroup, Separator} from "./CoreUI"
 import {Button} from "./Button"
 import {BigNumber, utils} from "ethers"
 
-
-
 export const FunderLeaveComponent = ({t}) => {
     let addr = LOBBY_CONTRACT_ADDRESS
     const {a} = useContract()
@@ -46,7 +44,7 @@ export const FunderLeaveComponent = ({t}) => {
 
     return (
         <div style={{padding: "5px"}}>
-            <Btn disabled={processing}  onClick={funderLeave} wide='100%'>
+            <Btn disabled={processing} onClick={funderLeave} wide="100%">
                 Mastermind end this mission
             </Btn>
         </div>

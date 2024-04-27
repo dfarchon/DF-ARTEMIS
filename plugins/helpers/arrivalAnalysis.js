@@ -1,47 +1,46 @@
 import {log} from "./helpers"
 import {locationIdToDecStr, locationIdFromDecStr} from "@darkforest_eth/serde"
-import {BigNumber,utils} from "ethers"
+import {BigNumber, utils} from "ethers"
 
-export async function analysis(task, addr){
-    const planetId = locationIdFromDecStr(task.planetId.toString());
-    const beginTime = task.beginTime;
-    const funder = task.funder.toLowerCase();
-    const manager = task.manager.toLowerCase();
-    const blacklist = task.blacklist.map(p=>p.toLowerCase());
-    const account = addr.toLowerCase();
+export async function analysis(task, addr) {
+    const planetId = locationIdFromDecStr(task.planetId.toString())
+    const beginTime = task.beginTime
+    const funder = task.funder.toLowerCase()
+    const manager = task.manager.toLowerCase()
+    const blacklist = task.blacklist.map((p) => p.toLowerCase())
+    const account = addr.toLowerCase()
 
-    const payoutTotal = BigNumber.from(task.payoutTotal);
-    const x  = BigNumber.from(task.x);
+    const payoutTotal = BigNumber.from(task.payoutTotal)
+    const x = BigNumber.from(task.x)
 
-    log("=== Arrival Analysis === ", "debug");
-    log("planetId:" + planetId, "debug");
-    log("beginTime:" + beginTime, "debug");
-    log("x:" + x.toString(), "debug");
-    log("payout total:" + utils.formatEther(payoutTotal), "debug");
-    log("query account:" + account, "debug");
-    log("funder:" + funder, "debug");
-    log("manager:" + manager, "debug");
-    log("blacklist:", "debug");
-    log(blacklist, "debug");
+    log("=== Arrival Analysis === ", "debug")
+    log("planetId:" + planetId, "debug")
+    log("beginTime:" + beginTime, "debug")
+    log("x:" + x.toString(), "debug")
+    log("payout total:" + utils.formatEther(payoutTotal), "debug")
+    log("query account:" + account, "debug")
+    log("funder:" + funder, "debug")
+    log("manager:" + manager, "debug")
+    log("blacklist:", "debug")
+    log(blacklist, "debug")
 
-    const  rawArrivals = await  df.getContractAPI().getTargetPlanetAllArrivals(planetId,beginTime);
-    const arrivals = rawArrivals.filter((arr) => {
-        let player = arr.player.toLowerCase()
-        return player != funder && player != manager && blacklist.indexOf(player) === -1
-    }).sort((a,b)=> a.departureTime<b.departureTime);
-
+    const rawArrivals = await df.getContractAPI().getTargetPlanetAllArrivals(planetId, beginTime)
+    const arrivals = rawArrivals
+        .filter((arr) => {
+            let player = arr.player.toLowerCase()
+            return player != funder && player != manager && blacklist.indexOf(player) === -1
+        })
+        .sort((a, b) => a.departureTime < b.departureTime)
 
     for (let i = 0; i < arrivals.length; i++) {
         let rhs = arrivals[i]
         console.log("%s %s %s", beginTime, rhs.departureTime, rhs.arrivalTime)
     }
 
-
     let energyPayoutLimit = payoutTotal.div(x)
     let energySum = 0
     let energyOfMe = 0
     let energyCounted = 0
-
 
     for (let i = 0; i < arrivals.length; i++) {
         let arr = arrivals[i]
@@ -75,5 +74,5 @@ export async function analysis(task, addr){
 
     energyPayoutLimit = energyPayoutLimit.toString()
 
-    return {amount, energyOfMe, energySum, energyCounted, energyPayoutLimit}    
+    return {amount, energyOfMe, energySum, energyCounted, energyPayoutLimit}
 }

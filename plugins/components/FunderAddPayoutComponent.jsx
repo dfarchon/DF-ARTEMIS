@@ -7,7 +7,7 @@ import {useContract} from "../helpers/AppHooks"
 import {Input} from "./Input"
 import {Btn} from "./Btn"
 import {BigNumber, utils} from "ethers"
-import { EmSpacer } from "./CoreUI"
+import {EmSpacer} from "./CoreUI"
 
 const SectionHeader = styled.div`
     color: "color(" #bbb ").hex()";
@@ -143,32 +143,27 @@ export const FunderAddPayoutComponent = ({t}) => {
             <Section>
                 <SectionHeader> Add Reward (ETH) </SectionHeader>
                 <Row>
+                    <span>Add reward amount: {payout} ETH</span>
                     <span>
-                        Add reward amount: {payout} ETH
+                        <Input
+                            placeholder="ETH"
+                            wide={true}
+                            type="number"
+                            value={payout}
+                            onChange={changePayout}
+                            onKeyUp={onKeyUp}
+                            step={0.001}
+                            style={{width: "200px"}}
+                        />
                     </span>
-                    <span>
-                    <Input
-                        placeholder="ETH"
-                        wide={true}
-                        type="number"
-                        value={payout}
-                        onChange={changePayout}
-                        onKeyUp={onKeyUp}
-                        step={0.001}
-                        style={{width:'200px'}}
-                    />
-                    </span>
-                    
                 </Row>
-                <EmSpacer height='10px' />
+                <EmSpacer height="10px" />
                 <div>
-                <Btn className="btn" disabled={processing}  onClick={save} wide='500px'>
-                    Add Mission Reward
-                </Btn>
+                    <Btn className="btn" disabled={processing} onClick={save} wide="500px">
+                        Add Mission Reward
+                    </Btn>
                 </div>
             </Section>
-      
-            
         </div>
     )
 }

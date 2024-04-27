@@ -27,11 +27,11 @@ const Row = styled.div`
 
     & > span:first-child {
         /* flex-grow: 1; */
-        width: '100px';
+        width: "100px";
     }
 
-    & > span:second-child{
-        width: '400px';
+    & > span:second-child {
+        width: "400px";
     }
 `
 
@@ -138,13 +138,10 @@ export function ListingPanel({state}) {
             for (let i = 0; i < blacklist.length; i++) {
                 let account = blacklist[i].toString().toLowerCase()
                 showBlacklist.push(
-                    <Row key={t.taskId+'-blacklist-'+i}>
+                    <Row key={t.taskId + "-blacklist-" + i}>
                         <span>Blacklist #{i}:</span>
-                        <span>{account} 
-
-                        </span>
+                        <span>{account}</span>
                     </Row>
-                
                 )
             }
 
@@ -200,44 +197,45 @@ export function ListingPanel({state}) {
                         style={{...table, backgroundColor: active && active.taskId == t.taskId ? "#252B43" : ""}}
                     >
                         <td colSpan="8">
-                            <Row key={t.taskId+'-beginTime'}>
+                            <Row key={t.taskId + "-beginTime"}>
                                 <span> Begin Time</span>
                                 <span>{formatTime(beginTime) + " UTC+0"}</span>
                             </Row>
 
-                            <Row key={t.taskId+'-endTime'}>
+                            <Row key={t.taskId + "-endTime"}>
                                 <span> End Time</span>
                                 <span>{formatTime(endTime) + " UTC+0"}</span>
                             </Row>
-                          
-                           <Row key={t.taskId+'-currentTime'}>
+
+                            <Row key={t.taskId + "-currentTime"}>
                                 <span>Current Time</span>
                                 <span>{formatTime(undefined) + " UTC+0"}</span>
                             </Row>
 
-                           <Row  key={t.taskId+'-mastermind'}>
+                            <Row key={t.taskId + "-mastermind"}>
                                 <span>Mastermind</span>
                                 <span>{t.funder.toString()}</span>
                             </Row>
 
-                           <Row  key={t.taskId+'-middleman'}>
+                            <Row key={t.taskId + "-middleman"}>
                                 <span>Middleman</span>
                                 <span>{t.manager.toString()}</span>
                             </Row>
-                               {showBlacklist}
-                            
-                            <Row  key={t.taskId+'-balance/energy'}>
-                                <span>{'Reward <=> Energy'}</span>
-                                <span>{utils.formatEther(t.x.mul(1000)) + ' ETH <=> 1000 Energy'} </span>
+                            {showBlacklist}
 
+                            <Row key={t.taskId + "-balance/energy"}>
+                                <span>{"Reward <=> Energy"}</span>
+                                <span>{utils.formatEther(t.x.mul(1000)) + " ETH <=> 1000 Energy"} </span>
                             </Row>
-                            
-                            <Row  key={t.taskId+'-reward'}>
+
+                            <Row key={t.taskId + "-reward"}>
                                 <span>Mission Reward Balance / Total</span>
-                                <span>{utils.formatEther(t.payoutBalance)} ETH / {utils.formatEther(t.payoutTotal)} ETH </span>
+                                <span>
+                                    {utils.formatEther(t.payoutBalance)} ETH / {utils.formatEther(t.payoutTotal)} ETH{" "}
+                                </span>
                             </Row>
-                          
-                            {state === 1 ? <FunderAddPayoutComponent t={t} /> : ""}
+
+                            {/* {state === 1 ? <FunderAddPayoutComponent t={t} /> : ""} */}
                             {state === 1 ? <FunderLeaveComponent t={t} /> : ""}
                             {state === 2 ? <ManagerConfirmComponent t={t} /> : ""}
                             {state === 3 ? <MercenarySubmitComponent t={t} /> : ""}

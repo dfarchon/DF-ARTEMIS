@@ -293,7 +293,7 @@ export const FunderPublishPanel = () => {
     }
 
     return (
-        <div style={{width:'520px'}}>
+        <div style={{width: "550px"}}>
             {/* <div style={funderPublishFont}>Funder Publish New Contract</div> */}
             {/* planetId */}
 
@@ -397,11 +397,11 @@ export const FunderPublishPanel = () => {
                 </Row>
             </Section>
 
-            <EmSpacer height='20px'/>
-           
+            <EmSpacer height="20px" />
+
             {/* funder publish */}
             <div style={{padding: "0px"}}>
-                <Btn disabled={processing} onClick={funderPublish} wide='50%'>
+                <Btn disabled={processing} onClick={funderPublish} wide="50%">
                     Publish New Mission
                 </Btn>
             </div>

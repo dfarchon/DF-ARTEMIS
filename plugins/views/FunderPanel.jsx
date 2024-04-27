@@ -5,31 +5,27 @@ import {usePause} from "../helpers/AppHooks"
 import {Loading} from "../components/Loading"
 import {FunderPublishPanel} from "./FunderPublishPanel"
 import {ListingPanel} from "./ListingPanel"
-import { Btn } from "../components/Btn";
-import { Spacer,EmSpacer } from "../components/CoreUI";
-
-
-const Content = styled.div`
-  width: 530px;
-  margin-left: 10px;
-  overflow-y: scroll;
-  display: flex;
-  flex-direction: column;
-  /* text-align: justify; */
-`;
+import {Btn} from "../components/Btn"
+import {Spacer, EmSpacer} from "../components/CoreUI"
 
 const Row = styled.div`
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: row;
 
-  justify-content: space-between;
-  align-items: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
 
-  & > span:first-child {
-    flex-grow: 1;
-  }
-`;
+    & > span:first-child {
+        /* flex-grow: 1; */
+        width: "100px";
+    }
 
+    & > span:second-child {
+        width: "400px";
+    }
+`
 
 const ButtonBar = styled.div`
     display: flex;
@@ -39,9 +35,9 @@ const ButtonBar = styled.div`
     margin-right: 20px;
 `
 
-const MainDiv = styled.div`
-    padding: 0 0 10px 0;
-`
+// const MainDiv = styled.div`
+//     padding: 0 0 10px 0;
+// `
 
 const activeButton = {
     background: "#fff",
@@ -65,31 +61,29 @@ export const FunderPanel = () => {
             <div style={{fontSize: "30px"}}> DF ARTEMIS IS PAUSED NOW</div>
         </div>
     ) : (
+        <div>
+            <Row>
+                <Btn
+                    onClick={() => setTab("publish")}
+                    wide={"40%"}
+                    style={tab === "publish" ? activeButton : normalButton}
+                >
+                    Publish Mission
+                </Btn>
+                <Spacer width={16} />
 
-        <Content>
-         
-  
-    
-           <Row>
-              <Btn onClick={() => setTab("publish")}  wide={'40%'} style={ tab==='publish'?activeButton:normalButton}>
-                Publish Mission
-              </Btn>
-              <Spacer width={16} />
+                <Btn onClick={() => setTab("query")} wide={"40%"} style={tab === "query" ? activeButton : normalButton}>
+                    Mission Records
+                </Btn>
+            </Row>
 
-              <Btn  onClick={() =>setTab("query")} wide={'40%'} style={tab==='query'?activeButton:normalButton}>
-                Mission Records
-              </Btn>
-              
-           </Row>
-   
-
-           <Row>
-              <MainDiv key="funderMainDiv">
-                {tab === "publish" ? <FunderPublishPanel /> : <ListingPanel state={1} />}
-              </MainDiv>
-           </Row>
-        </Content>
+            <div key="funderMainDiv">
+                {tab === "publish" ? (
+                    <FunderPublishPanel />
+                ) : (
+                    <ListingPanel state={1} style={{...textCenter, padding: "5px"}} />
+                )}
+            </div>
+        </div>
     )
 }
-
-
