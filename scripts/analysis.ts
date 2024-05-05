@@ -13,7 +13,8 @@ async function main() {
     // v0.0.2
     // const artemisAddress = "0xEe2A8A1ccF2D422b92c78cfb850b1E6BCC5A37eC"
     // const artemisAddress = "0x8B81fdEa2fF97aC75570985946A8fe38bB9B0B75";
-    const artemisAddress = "0xDCf0e438c10Deb6e37bd09E0439e4FA5C16f5BBE";
+    // const artemisAddress = "0xDCf0e438c10Deb6e37bd09E0439e4FA5C16f5BBE";
+    const artemisAddress = "0xEAe9e157CbfBBCDee06F0ad1eA7aeA8ccA2A4523";
     const artemisContract = new ethers.Contract(artemisAddress, artemisABI, creator)
 
     const contractOwner = await artemisContract.getCreator()
