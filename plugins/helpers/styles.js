@@ -1,7 +1,7 @@
 import {ArtifactRarity} from "@darkforest_eth/types"
 
 export const listStyle = {
-    maxHeight: "700px",
+    maxHeight: "600px",
     overflowX: "hidden",
     overflowY: "scroll",
     width: "100%",
@@ -25,10 +25,21 @@ export const textCenter = {
     marginBottom: "10px",
 }
 
-export const table = {
-    lineHeight: "25px",
-    width: "100%",
+export const tableContainer = {
+  width: '660px',
+  margin: '0 auto'
 }
+export const table = {
+    width: '100%',
+  borderCollapse: 'collapse' 
+}
+
+export const td  = {
+    width: 'calc(600px / 6)', 
+    border: '1px solid #000',
+    padding: '10px',
+    textAlign:'center' 
+  }
 
 export const inputStyle = {
     outline: "none",

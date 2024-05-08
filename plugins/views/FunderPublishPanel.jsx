@@ -293,7 +293,7 @@ export const FunderPublishPanel = () => {
     }
 
     return (
-        <div style={{width: "550px"}}>
+        <div>
             {/* <div style={funderPublishFont}>Funder Publish New Contract</div> */}
             {/* planetId */}
 

@@ -11,7 +11,7 @@ const FooterBar = styled.div`
     padding: 8px 8px 0px 8px;
     margin: 0px -5px;
     border-top: 1px solid ${dfstyles.colors.border};
-    width: 555px;
+    width: 700px;
 `
 
 const Support = styled.div`

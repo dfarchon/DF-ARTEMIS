@@ -15,7 +15,7 @@ class ArtemisPlugin {
         //@ts-expect-error
         this.container = container
 
-        container.style.width = "550px"
+        container.style.width = "700px"
 
         try {
             const a = await getArtemisContract()

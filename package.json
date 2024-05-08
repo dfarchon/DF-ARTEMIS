@@ -1,6 +1,6 @@
 {
     "name": "@dfares/df-artemis",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "Planet-targeted bounty mercenary system for Dark Forest",
     "files": ["dest"],
     "scripts": {

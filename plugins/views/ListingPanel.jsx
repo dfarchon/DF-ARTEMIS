@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from "react"
-import {listStyle, textCenter, table} from "../helpers/styles"
+import {listStyle, textCenter, table,td} from "../helpers/styles"
 import styled from "styled-components"
 import {callAction, log} from "../helpers/helpers"
 import {LOBBY_CONTRACT_ADDRESS, notifyManager, own} from "../constants"
@@ -261,12 +261,12 @@ export function ListingPanel({state}) {
                 <table style={table}>
                     <thead>
                         <tr>
-                            <th> Mission </th>
-                            <th> Planet </th>
-                            <th> Balance </th>
-                            <th> Balance/Energy </th>
-                            <th> Energy </th>
-                            <th> More </th>
+                            <th style={td}> Mission </th>
+                            <th style={td}> Planet </th>
+                            <th style={td}> Balance </th>
+                            <th style={td} > Balance/Energy </th>
+                            <th style={td}> Energy </th>
+                            <th style={td}> More </th>
                         </tr>
                     </thead>
                     <tbody>{listingChildren}</tbody>
