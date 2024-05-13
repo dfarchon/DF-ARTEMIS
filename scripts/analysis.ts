@@ -38,6 +38,8 @@ async function main() {
     creatorFeeBalance = ethers.utils.formatUnits(creatorFeeBalance, "ether")
     console.log("Creator Fee Balance -> " + creatorFeeBalance)
 
+    let payoutSum =  ethers.BigNumber.from(0)
+
     for (let k = 0; k < lobbyIds.length; k++) {
         let lobbyId = lobbyIds[k]
 
@@ -62,11 +64,13 @@ async function main() {
             const taskId = t.taskId;
             const payoutTotal = ethers.utils.formatUnits(t.payoutTotal);
             const funder = t.funder;
+            payoutSum = payoutSum.add(t.payoutTotal);
             console.log('TaskID #'+taskId+ " -> funder -> " + funder + " -> " + payoutTotal +' ETH');
 
         }
         console.log('------------------------- Task Payout Total List End ---------------------------------');
-
+        console.log('payout sum:',ethers.utils.formatEther(payoutSum),'ETH');
+        console.log('--------------------------------------------------------------------------------------');
 
         for (let i = 0; i < tasks.length; i++) {
             let t = tasks[i]
